@@ -8,8 +8,20 @@ def home():
 
 @app.route('/render')
 def render():
-    return render_template('index.html')
+    mylist=[1,2,3,4,5]
+    return render_template('index.html', mylist=mylist)
 
+@app.route('/form',methods=['GET','POST'])
+def form():
+    if request.method == "GET":
+        return  render_template('form.html')
+    elif request.method == "POST":
+        #username = request.form.get('username')
+       # password = request.form.get('password')
+   # return f"{username} {password}"
+        form_data = request.form.to_dict()
+        return f"Form Data: {form_data}"
+    # any way is possible, second one gives whole body of the written code. 
 @app.route('/hello', methods=['GET','POST'])
 def hello():
     if request.method == "GET":
