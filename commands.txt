@@ -1,0 +1,50 @@
+ COMMANDS TO MAKE A WEB APP AND GET IT RUNNING 
+mkdir flask_project && cd flask_project
+python3 -m venv venv  
+source venv/bin/activate  # For Mac
+pip install flask
+touch app.py
+to run python app.py
+# TO INSTALL AND CONNECT MONGODB  pip install Flask-PyMongo
+# TO CONNECT AND START USING 
+        app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
+        mongo = PyMongo(app)
+# BASIC FORMAT
+
+your_project/
+├── backend/
+│   ├── venv/         # Virtual environment for your Flask app
+│   ├── app.py        # Your Flask code
+│   └── requirements.txt
+└── frontend/
+    ├── index.html    # Your frontend files (or other framework-specific files)
+    └── ...
+
+# ADVANCED FORMAT WITH MORE DETAILS
+
+flask_project/
+│── backend/                  # Main backend folder
+│   │── app/                   # Application module
+│   │   │── __init__.py        # Initializes the app
+│   │   │── routes/            # Routes (Controllers)
+│   │   │   │── __init__.py    # Import routes
+│   │   │   │── auth.py        # Authentication routes
+│   │   │   │── user.py        # User-related routes
+│   │   │   │── product.py     # Example: Product-related routes
+│   │   │── models/            # Models (Database Schemas)
+│   │   │   │── __init__.py    # Import models
+│   │   │   │── user.py        # User model
+│   │   │   │── product.py     # Product model
+│   │   │── services/          # Business logic (optional)
+│   │   │   │── user_service.py # User-related logic
+│   │   │── templates/         # HTML files (for rendering views)
+│   │   │   │── index.html
+│   │   │── static/            # Static files (CSS, JS, Images)
+│   │   │   │── css/
+│   │   │   │── js/
+│   │   │── config.py          # Configuration file (DB, Secret keys, etc.)
+│   │── run.py                 # Entry point to run Flask app
+│── frontend/                  # If using a separate frontend (React, Vue, etc.)
+│── venv/                      # Virtual environment
+│── requirements.txt           # Dependencies
+│── README.md                  # Project documentation

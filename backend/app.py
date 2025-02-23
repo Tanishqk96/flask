@@ -1,11 +1,20 @@
 from flask import Flask, request, render_template , session, make_response
 import pandas as pd
+from flask_pymongo import PyMongo
 app = Flask(__name__, template_folder="templates", static_folder='static', static_url_path='/')
 app.secret_key = "sessionkey"
+# ADDING MONGODB WITH FLASK
+app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
+db = PyMongo(app).db
 @app.route('/')
 def home():
     return "<h1>Hello, Flask!<h1/>"
 
+@app.route('/mongo')
+def mongo():
+    db.inventory.insert_one({"b":2})
+    return "inserted"
+    
 @app.route('/render')
 def render():
     mylist=[1,2,3,4,5]
