@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template 
-
+import pandas as pd
 app = Flask(__name__, template_folder="templates")
 
 @app.route('/')
@@ -28,6 +28,28 @@ def hello():
         return "get request"
     elif request.method == "POST":
         return "post request"
+    
+# uploading and reading files 
+@app.route('/fileupload', methods=['GET','POST'])
+def fileupload():
+    if request.method == "GET":
+        return render_template('form.html')
+    elif request.method == "POST":
+        uploaded_file = request.files.get('file')
+        if not uploaded_file:
+            return "No file uploaded!", 400
+        
+        try:
+            # Read file content as text
+           # file_content = uploaded_file.read().decode('utf-8')
+           file_content = pd.read_csv(uploaded_file)
+           # either just read it normally or use pandas to read the csv 
+        except Exception as e:
+            return f"Error reading file: {e}", 500
+        
+        # Display the content (in a real app, you might want to render a template)
+        return f"<h1>Uploaded File Content</h1><pre>{file_content}</pre>"
+
     
 @app.route('/xy')
 def xy():
